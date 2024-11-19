@@ -7,12 +7,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.shayan.mvvm_login.databinding.ActivityMainRegisterBinding
 import com.shayan.mvvm_login.model.ModelUser
-import com.shayan.mvvm_login.viewmodel.RegisterViewModel
+import com.shayan.mvvm_login.viewmodel.AuthViewModel
 
 class MainActivityRegister : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainRegisterBinding
-    private val registerViewModel: RegisterViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class MainActivityRegister : AppCompatActivity() {
                         passwordInput,
                         confirmPasswordInput
                     )
-                    registerViewModel.registerUser(modelUser, {
+                    authViewModel.registerUser(modelUser, {
                         Toast.makeText(
                             this@MainActivityRegister, "Registration successful", Toast.LENGTH_SHORT
                         ).show()
@@ -47,7 +47,6 @@ class MainActivityRegister : AppCompatActivity() {
                         )
                         finish()
                     }, { errorMessage ->
-                        println("Registration error: $errorMessage") // For debugging
                         Toast.makeText(this@MainActivityRegister, errorMessage, Toast.LENGTH_SHORT)
                             .show()
                     })

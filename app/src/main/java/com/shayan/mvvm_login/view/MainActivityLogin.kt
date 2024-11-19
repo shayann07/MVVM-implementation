@@ -7,13 +7,13 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.shayan.mvvm_login.databinding.ActivityMainLoginBinding
-import com.shayan.mvvm_login.viewmodel.LoginViewModel
+import com.shayan.mvvm_login.viewmodel.AuthViewModel
 
 class MainActivityLogin : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainLoginBinding
     private lateinit var sharedPreferences: SharedPreferences
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class MainActivityLogin : AppCompatActivity() {
                 val password = passwordEditText.text.toString()
 
                 if (phone.isNotEmpty() && password.isNotEmpty()) {
-                    loginViewModel.loginUser(phone, password, { token ->
+                    authViewModel.loginUser(phone, password, { token ->
                         saveToken(token)
                         startActivity(Intent(this@MainActivityLogin, MainActivityHome::class.java))
                         finish()
